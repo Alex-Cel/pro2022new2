@@ -1,0 +1,131 @@
+/* ESTA ES MI HOJA DE ESTILOS */
+
+/* Utilizo Algunas Fuentes de LETRAS GOOGLE */
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+
+.contenedor-principal{
+  position:relative;
+  display:block;
+  display: flex;
+  justify-content: space-between;
+  width:100rem;
+  height: 10rem;
+  align-items: center;
+  text-align: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-bottom: 25rem;
+  background-color: aqua;
+  font-family: 'Poppins', sans-serif;
+  
+}
+.contenedor-secundario{
+  position:absolute;
+  display:block;
+  display: flex;
+  justify-content: center;
+  width:50rem;
+  height: 5rem;
+  align-items: center;
+  text-align: center;
+  background-color: blue;
+  font-family: 'Poppins', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #edeef6;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+button {
+  background-color: #47a386;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 25px;
+}
+
+.modal-container {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;  
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: opacity 0.3s ease;
+}
+
+.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal {
+  background-color: #fff;
+  width: 600px;
+  max-width: 100%;
+  padding: 30px 50px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal h1 {
+  margin: 0;
+}
+
+.modal p {
+  opacity: 0.7;
+  font-size: 14px;
+}
+/* CLASES PARA LA VISUALIZACION DEL EJERCICIO PLANTEADO*/
+/* CONTENEDOR PARA VER EL ARCHIVO DEL EJERCICIO */
+.contenedor-ejercicio {
+  width:42rem;
+  height: 45rem;
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
+ }
+/*  AQUI LEO EL ARCHIVO DEL EJERCICIO */
+.ver-ejercicio{
+  background-image: url(ejercicio4.svg); /* SOLO TOMA IMAGENES*/
+  opacity: 100%;
+  background-position: center center; /* CENTRA LA IMAGEN*/
+  background-size: contain; /* ACOMODA LA IMAGEN EN LA PANTALLA, TOMA EL    ESPACIO DISPONIBLE EN LA PANTALLA TANTO EN ALTO COMO EN ANCHO */
+}
+.contenedor-ejercicio .btn-cerrar-ejercicio {
+    justify-content: flex-end;
+    display: flex;
+    margin-top: 1rem;
+}
+.puntero-signo{
+  cursor: help;
+}
+.puntero-reloj{
+  cursor: progress;
+}
+.verde{
+  color:green;
+}
+.azul{
+  color:blue;
+}
+ejercicio-resuelto{
+  background-image: url(AguilaReal.jpg);
+}

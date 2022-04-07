@@ -1,0 +1,180 @@
+<!-- DOCUMENTACION: El siguiente programa está escrito en Lenguaje Html5, Css3, y JavaScrip ES6.
+El lenguaje JavaScript va Embebido dentro de la misma aplicación, es decir no uso archivos externos, tampoco utilizo ningún Framework(Herramienta).
+NOTA: NO UTLIZO EL PUNTO Y COMA(;) en JavaScript ECMAScript v6, ya que es una de las grandes mejoras de esta versión, puede usarse pero no es indispensable -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio Final P4</title>
+
+    <!-- ESTILOS CC3 PARA MI HTML --> 
+    <link rel="stylesheet" href="VentanaModal.css">
+    <!-- Fin de la etiqueta para ESTILOS -->
+
+</head>
+
+<body>
+    <div class="contenedor-principal">
+        <h1 style="color:blue">Ejercicio de Matemáticas en Lenguaje JavaScrip-ECMAScript 6</h1>
+        <h2 style="color:red">Realizado por: Ing. Eduardo Arias</h2>
+    </div> <!-- Fin contenedor-principal -->
+
+    <!-- METODO GET DE HTML5, PARA CAPTURAR LUEGO CON JAVASCRIPT -->
+    <div class="contenedor-secundario">
+        <form action="" method="get">
+            
+            <label for="nombre" style="color:blanchedalmond" class="puntero-reloj azul">Escribe el Número: </label>
+            <!-- AQUI VALIDO QUE EL NUMERO A INGRESAR POR TECLADO, SEA MAYOR QUE CERO(0) min = "1" -->
+            <input type="number" name="number" id="boton-resolver" placeholder="Menor/igual a 10.000 " min = "1" required></input>
+
+            <button onclick="PlanteamientoEjercicio()" id="boton-plantear" class="puntero-signo azul" style="color:blanchedalmond">Ver planteamiento del Ejercicio</button> -->
+
+            <button onclick="ResolverEjercicio()" id="boton-resolver" class="puntero-reloj azul" style="color:blanchedalmond">Resolver Ejercicio</button>
+
+        </form><!-- Fin METODO GET -->
+    </div><!-- Fin contenedor-secundario -->
+
+    <div id="modal_container" class="modal-container">
+        <div class="contenedor-ejercicio ver-ejercicio">
+           <div class="btn-cerrar-ejercicio">   
+             <button id="close">Cerrar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ESTE ES EL ARRAY GLOBAL, DONDE GUARDAREMOS CADA UNA DE LAS OPERACIONES MATEMATICAS, EN FORMA SECUENCIAL, E IGUALMENTE DECLARAMOS COMO GLOBAL LA VARIABLE resultado0 EN LA CUAL ALMACENAMOS EL VALOR DE P² -->
+    <script>
+        let OperacionesMatematicas = new Array()
+        let resultado0 
+    </script>
+
+    <!-- JavaScript Es6 Puro, sin Frameworks -->
+    <script>
+        /* DECLARACION DE VARIABLES, Y SE CALCULA 10 ELEVADO A LA 4, LO CUAL ES = 10.000, OSEA EL NUMERO A INGRESAR DEBE ESTAR ENTRE 1 Y 10.000*/
+        let resultadoPoteciacion = Math.pow(10, 4) /* ESTA VARIABLE ES EL PUNTO DE PARTIDA DEL EJERCICIO */
+
+        // botton + onclick (2 botones independientes)
+        // ESTA FUNCION ME MUESTRA LA FOTO DEL ARCHIVO DONDE ESTA EL EJERCICIO PLANTEADO
+        function PlanteamientoEjercicio(){
+            const open = document.getElementById('boton-plantear');
+            const modal_container = document.getElementById('modal_container')
+            const close = document.getElementById('close')
+            open.addEventListener('click', () => {
+            modal_container.classList.add('show')  
+            })
+            close.addEventListener('click', () => {
+            modal_container.classList.remove('show')
+            return
+        })
+        }// Fin de la FUNCION PlanteamientoEjercicio()
+
+        // ESTA FUNCION RESUELVE EL EJERCICIO PLANTEADO
+    function ResolverEjercicio(){
+        let P = document.getElementById("boton-resolver").value
+        let pares= 0
+        let impares= 0
+        let p_resultado= 0
+        
+        /* PROBANDO UN FOR ARRECHISIMO */
+        /* let resultadoPoteciacion = Math.pow(10, 4) */ /* ESTA YA ESTA ARRIBA */
+        //PRIMERA CONDICIÓN  si el valor que ingresaste es menor al máximo permitido en el ejercicio
+
+        /* AQUI LE DOY DOBLE VALIDACION */
+        if (P > 1 && P < resultadoPoteciacion) {  
+ 
+            resultado0 = Math.pow(P, 2)
+
+            console.log("El primer resultado es:  " + resultado0)
+
+            //PRIMER CICLO FOR i = 1 ya que el último valor de la suma es 1 o -1, y el que sigue es 0 por ende se desprecia. i pertenece a las iteraciones del ciclo FOR
+
+            for (let i = 1; i < P; i++) {                
+               //SEGUNDA CONDICIÓN  si el número es par, multiplicamos por 1
+                if (i % 2 === 0) {
+                    let resultado_1= Math.pow(P-i, 2)*(1)
+                    console.log("El resultado de la suma "+ i + " es: " + resultado_1)
+
+                    capturaOperacion(resultado_1)
+
+                    pares+= resultado_1
+
+                    //De lo contrario  si el número es impar, multiplicamos por -1
+                    
+                }else {
+
+                    let resultado_2= Math.pow(P-i, 2)*(-1)
+                    console.log("El resultado de la suma "+ i + " es: " + resultado_2)
+                    
+                    capturaOperacion(resultado_2)
+
+                    impares+= resultado_2
+                }                      
+                
+            }
+
+            //AQUI SE SUMAN LAS ITERACIONES PARES Y LAS IMPARES
+            let result =  pares + impares ;
+            console.log("la suma de todas las iteraciones del ejercicio es igual a: " + result)
+
+            //AQUI SE SUMAN EL RESULTADO PRINCIPAL Y EL RESULTADO DE TODAS LAS ITERACIONES
+            console.log("el valor que ingresaste, elevado al cuadrado + el resultado de todas las iteraciones del ejercicio es igual a: "+ (result + resultado0))   
+
+            //ÚLTIMA CONDICIÓN (de lo contrario) si el valor que ingresaste es mayor al máximo permitido en el ejercicio dará error
+
+            /* AQUI HE AGREGADO ESTA VARIBLE AL CODIGO TOTO-EDUARDO */
+            p_resultado = result + resultado0
+        }else {
+            console.log("El valor que ingresaste es inválido, por favor ingresa un valor mayor a cero y menor a 10000");
+            alert("El valor que ingresaste es inválido, por favor ingresa un valor mayor a cero y menor a 10000")
+        }
+       
+           
+        
+        /* YA TENIENDO TODO DENTRO DEL ARRAY AHORA LE DAREMOS EL FORMATO VISUAL CORRECTO, ES DECIR LE DAMOS EL FORMATO DE LOS SIGNOS MAS(+) Y LE QUITAMOS LAS COMAS QUE SEPARAN LOS ELEMENTOS DENTRO DE UN ARRAY(VECTOR), EL SIGNO (-) NO HACE FALTA TOCARLO PORQUE YA VIENE DENTRO DE CADA ELEMENTO QUE LE CORRESPONDE DENTRO DE DICHO ARRAY. Ejemplo: JavaScrpit nos presenta el ARRAY() Para un Valor Ingresado 5 nos daría el siguiente resultado: OperacionesMatematicas = ["25","-16","9","-4","1"] esto es el Lenguaje (JavaScript Es6) que Entiende la Pc, pero Nosotros los simples Mortales lo queremos así: 25-16+9-4+1 para desplegarlo por nuestro HTML5 */
+
+        /* CONVIERTO CADA ELEMENTO DEL ARRAY EN NUMEROS ENTEROS */
+        OperacionesMatematicas = OperacionesMatematicas.map(x => parseInt(x))
+       
+        /* ESTE ES EL ARRAY(VECTOR) DONDE ALAMCENAREMOS EL RESULTADO FINAL CON SUS SIGNOS POSITIVOS O NEGATIVOS */
+        let OperacionesMatematicasFinal = new Array()
+
+        for (let positivoOnegativo of OperacionesMatematicas){
+
+                /* AQUI BUSCO QUE SIGNO TIENE CADA ELEMENTO DEL ARRAY */
+            if (Math.sign(positivoOnegativo) === 1){
+                /* ES POSITIVO POR LO TANTO AGREGO EL SIGNO + AL NUMERO, Y SE LO INSERTO AL NUEVO ARRAY */
+                OperacionesMatematicasFinal.push("+" + positivoOnegativo)
+            }else {
+                /* ES NEGATIVO ENTONCES SE LO INSERTO AL NUEVO ARRAY, SIN MODIFICAR EL SIGNO */
+                OperacionesMatematicasFinal.push(positivoOnegativo)
+            }
+        }
+     
+        /* YA TENIENDO LAS OPERACIONES MATEMATICAS, AQUI LE AGREGAMOS A NUESTRO NUEVO ARRAY GLOBAL EN LA PRIMERA POSICION EL VALOR DE P², "SIN MODIFICAR EL SIGNO" */
+        OperacionesMatematicasFinal.unshift(resultado0) 
+
+        /* CONVIERTO EL ARRAY(VECTOR) EN UNA CADENA O STRING */
+        OperacionesMatematicasFinal = OperacionesMatematicasFinal.toString()
+        /* QUITO TODAS LAS COMAS DEL ARRAY(VECTOR) */
+        OperacionesMatematicasFinal = OperacionesMatematicasFinal.split(",").join("")
+
+        /* AQUI ENVIAMOS LAS VARIABLES DE JAVASCRIPT ES6 HACIA EL HTML5, SI Y SOLO SI, EL RESULTADO DEL EJERCICIO ES MAYOR A CERO(0), POR QUE SI NO LO VALIDAMOS NOS MOSTRARIA UN HTML SIN OPERACIONES MATEMATICAS Y CON UN RESULTADO 0, ESTO SE DEBE A QUE AUNQUE ESTE VALIDADO EL CAMPO DONDE INGRESAMOS EL NUMERO, HAY UN EVENTO ONCLICK Y DICHO EVENTO DESPLIEGA CUALQUIER HTML QUE ALLA DENTRO DEL DOM */
+        if(resultado0 > 1){
+            document.body.innerHTML = "<div style='text-align:center'><u><h1 style='color:blue' >DESCRIPCION DEL EJERCICIO:</h1></br></u>" + "<h2 style='color:red'>PLanteamiento: P²-(P-1)²+(P-2)²-(P-3)²+(P-4)²-(P-5)²+...-(P-n-1)²+(P-n)²</h2></br>" + "<h2>Si el Valor P= " + P + " se obtiene:"+"</h2>" + "</br>" + "<h2>"+OperacionesMatematicasFinal + "</h2>" + "</br>" + "<h2>Resultado= " + p_resultado + "</h2></div>"
+        }
+        /* FINAL JAVASCRIPT + HTML */
+    }// Fin de la FUNCION ResolverEjercicio()
+    </script><!-- Fin de la programacion en JAVASCRIPT ES6 -->
+
+    <Script>
+        /* AQUI CAPTURAMOS CADA UNA DE LAS OPERACIONES, A TRAVEZ DE UN ARRAY, EL CUAL DECLARAMOS GLOBAL AL INICIO DEL EJERCICIO PARA PODER IR AGREGANDOLE UNA A UNA DICHAS OPERACIONES MATEMATICAS */
+        function capturaOperacion(parametro){
+            OperacionesMatematicas.push(parametro)
+        }
+
+    </Script>
+
+</body>
+</html>
